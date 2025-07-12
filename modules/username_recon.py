@@ -77,6 +77,6 @@ def print_results(results, username):
 
 def open_profiles(results, username):
     for site, found in results.items():
-        if found:
+        if found is True:
             url = SITES[site].format(username)
             webbrowser.open(url) 
