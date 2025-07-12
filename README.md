@@ -1,11 +1,12 @@
 # Trixint
 
-Trixint is a CLI Python OSINT (Open Source Intelligence) tool for username and phone number reconnaissance across popular social media platforms and telecom numbering plans. It helps you quickly check if a username exists on dozens of sites, and analyze phone numbers for validity, region, and carrier info.
+Trixint is a CLI/GUI Python OSINT (Open Source Intelligence) tool for username and phone number reconnaissance across popular social media platforms and telecom numbering plans. It helps you quickly check if a username exists on dozens of sites, and analyze phone numbers for validity, region, and carrier info.
 
 ## Features
 
 - Check username existence on 30+ social and web platforms with a single command
 - Phone number OSINT: parse, validate, get country, region, carrier, and type
+- **NEW**: Graphical user interface (GUI) for easy point-and-click operation
 - Clean, readable CLI output
 - Modular codebase for easy extension
 - Fast and simple to use
@@ -24,59 +25,104 @@ Trixint is a CLI Python OSINT (Open Source Intelligence) tool for username and p
 
 ## Usage
 
-### Username Reconnaissance
-Check if a username exists across many platforms:
+### Command Line Interface (CLI)
+
+**Username OSINT:**
 ```bash
-python main.py <username>
+# Check username
+python main.py username
+
+# Check username and open found profiles in browser
+python main.py username --open
+
+# Check phone number
+python main.py --phone +12025550123
+
+# Check both username and phone
+python main.py username --phone +12025550123 --open
 ```
-Add `--open` to open found profiles in your browser:
+
+**Force CLI mode:**
 ```bash
-python main.py <username> --open
+python main.py --cli username
 ```
+
+### Graphical User Interface (GUI)
+
+**Launch GUI:**
+```bash
+python main.py --gui
+```
+
+The GUI provides:
+- Username input field with "Check Username" button
+- Phone number input field with "Check Phone" button
+- "Open Found Profiles" button to launch valid profiles in browser
+- Real-time results display with status updates
+- Threaded operations to keep GUI responsive
+
+### Phone Number Format
+
+For best results, use international format:
+- ✅ `+12025550123` (US)
+- ✅ `+919876543210` (India)
+- ✅ `+447911123456` (UK)
+
+The tool will auto-detect region for common formats, but international format is recommended.
+
+## What Trixint Can Do
+
+### Username OSINT
+- Check existence on 30+ platforms including GitHub, Twitter, Instagram, Reddit, Pinterest, TikTok, Facebook, LinkedIn, YouTube, SoundCloud, VK, Mastodon, Medium, DeviantArt, Twitch, Discord, Quora, Flickr, Steam, GitLab, Bitbucket, Replit, Keybase, Patreon, Behance, 500px, About.me, AngelList, ProductHunt, Goodreads, TripAdvisor, Badoo, OKCupid, Snapchat, Vimeo, Mixcloud, Bandcamp, Dribbble, Kaggle, Last.fm, Roblox, Wattpad, WordPress, and Tumblr
+- Open found profiles directly in browser
+- Clean, organized results display
 
 ### Phone Number OSINT
-Analyze a phone number for validity, country, region, carrier, and type:
-```bash
-python main.py --phone <number>
-```
-- **Tip:** For best results, use international format (e.g. `+12025550123`).
-- If you enter a number without a country code, the tool will guess the region (e.g. 10 digits starting with 7/8/9 = India, otherwise US). This is not always accurate.
+- Parse and validate international phone numbers
+- Get country, region, and carrier information
+- Detect number type (mobile, landline, etc.)
+- Auto-detect region for ambiguous numbers
 
-#### Example:
-```bash
-python main.py --phone +918113900396
-```
+## What Trixint Cannot Do
 
-### Combined Usage
-You can check both a username and a phone number in one command:
-```bash
-python main.py <username> --phone <number>
-```
+### Phone Numbers
+- **Cannot identify the owner** (name, address, personal info)
+- **Cannot check when last used** or activity status
+- **Cannot verify if currently active** or assigned
 
-## Limitations
-- **Phone number checks:**
-  - The tool CANNOT tell you who owns a number, if it is currently assigned, or when it was last used.
-  - It only checks if the number is possible/valid for a region and provides carrier/type info if available.
-  - Always use international format for best accuracy.
-- **Username checks:**
-  - Some platforms may block automated requests or change their profile URL patterns.
+These limitations are due to privacy laws and require access to private telecom databases.
 
 ## Project Structure
 
-- `main.py`: Entry point for the CLI tool
-- `modules/username_recon.py`: Username reconnaissance logic
-- `modules/phone_recon.py`: Phone number OSINT logic
-- `requirements.txt`: Python dependencies
+```
+Trixint/
+├── main.py                 # Main entry point
+├── modules/
+│   ├── username_recon.py   # Username OSINT functions
+│   ├── phone_recon.py      # Phone number OSINT functions
+│   └── gui.py             # Graphical interface
+├── requirements.txt        # Python dependencies
+├── README.md              # This file
+└── .gitignore            # Git ignore rules
+```
 
 ## Future Plans
 
-- Add support for more social media and web platforms
-- Export results to CSV/JSON
-- Add batch username and phone checking
-- Improve error handling and detection logic
-- Add advanced OSINT modules (email, data breach, etc.)
-- Docker support for easy deployment
+- [ ] Add more social media platforms
+- [ ] Email OSINT capabilities
+- [ ] Domain name reconnaissance
+- [ ] Advanced phone number lookups (with paid APIs)
+- [ ] Export results to various formats (JSON, CSV, PDF)
+- [ ] Batch processing for multiple usernames/numbers
+- [ ] Custom platform configuration
+- [ ] Rate limiting and proxy support
+- [ ] Dark web username checking
+- [ ] Integration with other OSINT tools
 
----
+## Contributing
 
-Contributions and suggestions are welcome!
+Feel free to submit issues, feature requests, or pull requests to improve Trixint!
+
+## License
+
+[Add your license here]
